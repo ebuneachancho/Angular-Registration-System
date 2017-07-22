@@ -1,0 +1,14 @@
+public function registerUser(){
+		$request= json_decode(file_get_contents('php://input'), TRUE);
+		$status = 0;
+		$this->load->model('user');
+		$result = $this->user->saveUser($request);
+		
+		if ($result) {
+			echo json_encode(array('success' => true, 'message'=> 'Registration successfull'));
+			// $this->load->view('users_view/email_confirmation_view_message', array('email'=>$result));
+		}else{
+			// this should never happen
+			echo json_encode(array('success'=>false, 'message'=> 'Registration Failed'));
+		}
+	}
